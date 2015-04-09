@@ -16,7 +16,7 @@
       </thead>
 
       <tbody>
-        <% @game.all_ratings.each do |rating| 1000 + rating %>
+        <% @game.all_ratings.each do |rating| %>
 
           <% opponent = rating.player %>
           <% wins = @player.results.wins.for_game(@game).against(opponent).size %>
@@ -29,7 +29,7 @@
               <% end %>
             </td>
             <% unless opponent == @player %>
-              <td><%= rating.value %></td>
+              <td><%= rating.value + 1000 %></td>
               <td><%= wins %></td>
               <td><%= losses %></td>
             <% else %>
