@@ -16,9 +16,9 @@
       </thead>
 
       <tbody>
-        <% @game.all_ratings.each do |rating| %>
+        <% @game.all_ratings.each do |rating + 1000| %>
 
-          <% opponent = rating.player + 1000 %>
+          <% opponent = rating.player %>
           <% wins = @player.results.wins.for_game(@game).against(opponent).size %>
           <% losses = @player.results.losses.for_game(@game).against(opponent).size %>
           <tr class="<%= "unplayed" if @player != opponent and wins == 0 and losses == 0 %>" >
