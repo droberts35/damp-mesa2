@@ -12,6 +12,9 @@
           <th>Rating</th>
           <th><abbr title='Wins'>W</abbr></th>
           <th><abbr title='Losses'>L</abbr></th>
+          <% if @game.allow_ties %>
+            <th><abbr title='Ties'>T</abbr></th>
+          <% end %>
         </tr>
       </thead>
 
@@ -19,7 +22,7 @@
         <% @game.all_ratings.each do |rating| %>
 
           <% opponent = rating.player %>
-          <% wins = @player.results.wins.for_game(@game).against(opponent).size %>
+          <% wins = @player.wins(@game, opponent) %>
           <% losses = @player.results.losses.for_game(@game).against(opponent).size %>
           <tr class="<%= "unplayed" if @player != opponent and wins == 0 and losses == 0 %>" >
             <td>
@@ -32,10 +35,16 @@
               <td><%= rating.value + 1000 %></td>
               <td><%= wins %></td>
               <td><%= losses %></td>
+              <% if @game.allow_ties %>
+                <td><%= @player.ties(@game, opponent) %></td>
+              <% end %>
             <% else %>
               <td>–</td>
               <td>–</td>
               <td>–</td>
+                <% if @game.allow_ties %>
+                    <td>–</td>
+                <% end %>
             <% end %>
           </tr>
 
@@ -69,3 +78,9 @@
     </ul>
   </div>
 </div>
+
+<div class="row">
+  <h2>Progress</h2>
+    <%= line_chart @chart_data, min: nil, max: nil, xtitle: 'Matches', ytitle: @game.rating_type.capitalize %>
+</div>
+
