@@ -40,6 +40,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'sqlite3'
 end
 
 group :test do
