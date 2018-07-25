@@ -6,7 +6,7 @@
         <strong> <%= winner.name %></strong>
       <% end %>
     <% end %>
-
+    <strong> <%='(' + team.score.to_s + ') ' if team.score%></strong>
     <% if i == 0 %>
       <% if result.tie? %>
         <small>ties</small>
