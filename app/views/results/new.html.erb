@@ -7,6 +7,7 @@
     <% if index != @result.teams.size - 1 %>
       <% if @game.allow_ties %>
         <%= select "result[teams][#{index}]", :relation, ["defeats", "ties"], {} %>
+        <%= number_field_tag "result[teams][#{index}][score]", nil, step: 1 %>
       <% else %>
         <%= hidden_field_tag "result[teams][#{index}][relation]", :defeats, {} %>
         Defeats:
